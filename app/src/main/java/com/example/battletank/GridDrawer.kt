@@ -5,6 +5,13 @@ import android.view.View
 import android.widget.FrameLayout
 
 class GridDrawer(private val context:Context) {
+    private val allLines= mutableListOf<View>()
+    fun removedGrid(){
+        val container= binding.container
+        allLines.forEach{
+        container.removeView(it)
+        }
+    }
     fun drawGrid(){
         val container= binding.container
         drawHorizontalLines(container)
@@ -15,10 +22,11 @@ class GridDrawer(private val context:Context) {
         while(topMargin<=container!!.height) {
             val horizontalLine = View(context)
             val layoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, 1)
-            topMargin += 50
+            topMargin += CELL_SIZE
             layoutParams.topMargin = topMargin
             horizontalLine.layoutParams = layoutParams
             horizontalLine.setBackgroundColor(Color.WHITE)
+            allLines.add(horizontalLine)
             container.addView(horizontalLine)
         }
     }
@@ -27,10 +35,11 @@ class GridDrawer(private val context:Context) {
         while(leftMargin<=container!!.width) {
             val verticalLine = View(context)
             val layoutParams = FrameLayout.LayoutParams(1,FrameLayout.LayoutParams.MATCH_PARENT)
-            leftMargin += 50
+            leftMargin += CELL_SIZE
             layoutParams.leftMargin = leftMargin
             verticalLine.layoutParams = layoutParams
             verticalLine.setBackgroundColor(Color.WHITE)
+            allLines.add(verticalLine)
             container.addView(verticalLine)
         }
     }
