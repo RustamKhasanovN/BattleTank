@@ -1,4 +1,4 @@
-package com.example.battletank
+package com.example.battletank.enums
 
 enum class Direction {
     UP,
